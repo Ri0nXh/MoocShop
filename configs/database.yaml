@@ -1,6 +1,8 @@
 mysql:
-  root: "root"
-  host: "127.0.0.1"
-  port: 3306,
-  password: "123456"
-  db: "mooc_shop"
+  user: root
+  host: 127.0.0.1
+  port: 3306
+  password: 123456
+  db: mooc_shop
+  max_open_conns: 50
+  max_idle_conns: 5

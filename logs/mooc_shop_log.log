@@ -1,1 +1,5 @@
 {"level":"INFO","time":"2023-02-25T15:51:34.543+0800","caller":"initialize/logger.go:35","msg":"init logger success"}
+{"level":"INFO","time":"2023-02-26T02:20:41.099+0800","caller":"initialize/logger.go:35","msg":"init logger success"}
+{"level":"INFO","time":"2023-02-26T02:23:39.521+0800","caller":"initialize/logger.go:35","msg":"init logger success"}
+{"level":"INFO","time":"2023-02-26T02:26:12.161+0800","caller":"initialize/logger.go:35","msg":"init logger success"}
+{"level":"INFO","time":"2023-02-26T02:26:55.971+0800","caller":"initialize/logger.go:35","msg":"init logger success"}
