@@ -10,9 +10,9 @@ import (
 func main() {
 
 	// 初始化配置文件信息
-	initialize.InitConfig()
+	initialize.Run()
 
 	// 初始化路由信息
 	engine := router.SetupRouter()
-	engine.Run(fmt.Sprintf(":%d", viper.GetInt("port")))
+	engine.Run(fmt.Sprintf(":%d", viper.GetInt("app.port")))
 }

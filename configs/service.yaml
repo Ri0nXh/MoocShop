@@ -1,4 +1,6 @@
-name: "MoocShop"
-port: 8080
-logs_path: "./logs"
+app:
+  name: "MoocShop"
+  port: 8080
+  mode: "dev"
+  
 

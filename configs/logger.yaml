@@ -1,0 +1,6 @@
+logger:
+  level: "debug"
+  filename: "./logs/mooc_shop_log.log"
+  max_size: 200
+  max_age: 7
+  max_backups: 30

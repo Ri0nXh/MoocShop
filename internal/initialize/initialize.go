@@ -1,29 +1,17 @@
 package initialize
 
-import (
-	"fmt"
-	"github.com/spf13/viper"
-	"io/ioutil"
-	"os"
-)
+import "fmt"
 
-func InitConfig() {
-	files, err := ioutil.ReadDir(CONFIG_PATH)
+func Run() {
+	// 初始化配置信息
+	err := initConfig()
 	if err != nil {
-		fmt.Println("config dir load error: ", err)
+		fmt.Printf("init config error: %v\n", err)
 	}
-	viper.SetConfigType("yaml")
-	for _, file := range files {
-		if file.IsDir() {
-			continue
-		}
-		f, err := os.Open(fmt.Sprintf("%s/%s", CONFIG_PATH, file.Name()))
-		if err != nil {
-			fmt.Printf("open %s error", file)
-		}
-		err = viper.MergeConfig(f)
-		if err != nil {
-			fmt.Println("viper merge config error: ", err)
-		}
+
+	err = initLogger()
+	if err != nil {
+		fmt.Printf("init logger error: %v\n", err)
 	}
+
 }
