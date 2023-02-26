@@ -1,6 +1,7 @@
-package dao
+package goods
 
 import (
+	"MoocShop/internal/dao"
 	"MoocShop/internal/model"
 	"fmt"
 )
@@ -31,32 +32,32 @@ func NewGoodsManager(tableName string) IGoods {
 
 // Create 创建商品
 func (gm *GoodsManager) Create(goods *model.Goods) error {
-	err := db.Table(gm.tableName).Create(&goods).Error
+	err := dao.DB.Table(gm.tableName).Create(&goods).Error
 	return err
 }
 
 // Delete 删除商品
 func (gm *GoodsManager) Delete(gid int) error {
 	sql := fmt.Sprintf("DELETE FROM %s WHERE id = %s", gm.tableName, gid)
-	err := db.Exec(sql).Error
+	err := dao.DB.Exec(sql).Error
 	return err
 }
 
 // Update 更新商品
 func (gm *GoodsManager) Update(gid int, m map[string]interface{}) (err error) {
-	err = db.Table(gm.tableName).Where("id = ?", gid).Updates(m).Error
+	err = dao.DB.Table(gm.tableName).Where("id = ?", gid).Updates(m).Error
 	return err
 }
 
 // SelectById 查询单个商品
 func (gm *GoodsManager) SelectById(gid int) (model.Goods, error) {
 	var mg model.Goods
-	err := db.Table(gm.tableName).Where("id = ?", gid).Find(&mg).Error
+	err := dao.DB.Table(gm.tableName).Where("id = ?", gid).Find(&mg).Error
 	return mg, err
 }
 
 // SelectAll 查询所有商品
 func (gm *GoodsManager) SelectAll(page int, size int) (goodsList []*model.Goods, err error) {
-	err = db.Table(gm.tableName).Order("id asc").Scopes(Paginate(page, size)).Find(&goodsList).Error
+	err = dao.DB.Table(gm.tableName).Order("id asc").Scopes(dao.Paginate(page, size)).Find(&goodsList).Error
 	return goodsList, err
 }

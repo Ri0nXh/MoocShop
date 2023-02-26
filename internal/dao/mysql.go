@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm/schema"
 )
 
-var db *gorm.DB
+var DB *gorm.DB
 
 func InitMySql() (err error) {
 	// 初始化连接信息
@@ -20,11 +20,11 @@ func InitMySql() (err error) {
 		viper.GetString("mysql.db"),
 		true,
 		"Local")
-	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{
+	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{
 		NamingStrategy: schema.NamingStrategy{
 			SingularTable: true},
 	})
-	sqlDB, err := db.DB()
+	sqlDB, err := DB.DB()
 	// 设置连接池 用于设置最大打开的连接数，默认值为0表示不限制.设置最大的连接数，可以避免并发太高导致连接mysql出现too many connections的错误。
 	sqlDB.SetMaxOpenConns(viper.GetInt("mysql.max_open_conns"))
 	// 设置最大连接数 用于设置闲置的连接数.设置闲置的连接数则当开启的一个连接使用完成后可以放在池里等候下一次使用。

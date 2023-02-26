@@ -4,3 +4,14 @@
 {"level":"INFO","time":"2023-02-26T02:26:12.161+0800","caller":"initialize/logger.go:35","msg":"init logger success"}
 {"level":"INFO","time":"2023-02-26T02:26:55.971+0800","caller":"initialize/logger.go:35","msg":"init logger success"}
 {"level":"INFO","time":"2023-02-26T02:28:26.814+0800","caller":"initialize/logger.go:35","msg":"init logger success"}
+{"level":"INFO","time":"2023-02-26T20:01:00.990+0800","caller":"initialize/logger.go:35","msg":"init logger success"}
+{"level":"INFO","time":"2023-02-26T20:19:40.165+0800","caller":"initialize/logger.go:35","msg":"init logger success"}
+{"level":"INFO","time":"2023-02-26T20:20:51.199+0800","caller":"initialize/logger.go:35","msg":"init logger success"}
+{"level":"INFO","time":"2023-02-26T20:21:53.679+0800","caller":"initialize/logger.go:35","msg":"init logger success"}
+{"level":"ERROR","time":"2023-02-26T20:21:58.886+0800","caller":"goods/goods.go:14","msg":"invalid character '\"' after object key:value pair"}
+{"level":"ERROR","time":"2023-02-26T20:22:23.504+0800","caller":"goods/goods.go:14","msg":"invalid character '\"' after object key:value pair"}
+{"level":"ERROR","time":"2023-02-26T20:22:37.359+0800","caller":"goods/goods.go:14","msg":"Key: 'ReqCreate.Sale' Error:Field validation for 'Sale' failed on the 'required' tag"}
+{"level":"ERROR","time":"2023-02-26T20:22:47.702+0800","caller":"goods/goods.go:14","msg":"Key: 'ReqCreate.Sale' Error:Field validation for 'Sale' failed on the 'required' tag"}
+{"level":"ERROR","time":"2023-02-26T20:24:02.214+0800","caller":"goods/goods.go:14","msg":"Key: 'ReqCreate.Sale' Error:Field validation for 'Sale' failed on the 'required' tag"}
+{"level":"INFO","time":"2023-02-26T20:24:24.590+0800","caller":"initialize/logger.go:35","msg":"init logger success"}
+{"level":"INFO","time":"2023-02-26T20:25:23.008+0800","caller":"initialize/logger.go:35","msg":"init logger success"}
