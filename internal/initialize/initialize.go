@@ -1,7 +1,7 @@
 package initialize
 
 import (
-	"MoocShop/internal/dao/mysql"
+	"MoocShop/internal/dao"
 	"fmt"
 )
 
@@ -19,7 +19,7 @@ func Run() {
 	}
 
 	// 初始化mysql数据库，
-	err = mysql.InitMySql()
+	err = dao.InitMySql()
 	if err != nil {
 		fmt.Printf("init mysql error: %v\n", err)
 	}
