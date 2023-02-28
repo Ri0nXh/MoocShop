@@ -20,15 +20,6 @@ func RespSuccess(c *gin.Context, data interface{}) {
 	})
 }
 
-// RespSuccess 成功
-func RespSuccessWithoutData(c *gin.Context) {
-	c.JSON(http.StatusOK, CommonResponse{
-		Code: CodeSuccess,
-		Msg:  CodeSuccess.Msg(),
-		Data: nil,
-	})
-}
-
 // RespSuccess 失败
 func RespError(c *gin.Context, code ResCode) {
 	c.JSON(http.StatusOK, CommonResponse{

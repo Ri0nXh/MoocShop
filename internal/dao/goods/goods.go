@@ -14,7 +14,7 @@ type GoodsDAO struct {
 type IGoods interface {
 	Create(*model.Goods) error
 	Delete(int) error
-	Update(int, map[string]interface{}) error
+	Update(model.Goods) error
 	SelectById(int) (model.Goods, error)
 	SelectAll(int, int) ([]*model.Goods, error)
 }
@@ -38,14 +38,15 @@ func (gm *GoodsManager) Create(goods *model.Goods) error {
 
 // Delete 删除商品
 func (gm *GoodsManager) Delete(gid int) error {
-	sql := fmt.Sprintf("DELETE FROM %s WHERE id = %s", gm.tableName, gid)
+	sql := fmt.Sprintf("DELETE FROM %s WHERE id = %d", gm.tableName, gid)
 	err := dao.DB.Exec(sql).Error
 	return err
 }
 
 // Update 更新商品
-func (gm *GoodsManager) Update(gid int, m map[string]interface{}) (err error) {
-	err = dao.DB.Table(gm.tableName).Where("id = ?", gid).Updates(m).Error
+func (gm *GoodsManager) Update(mg model.Goods) (err error) {
+	//err = dao.DB.Table(gm.tableName).Where("id = ?", gid).Updates(m).Error
+	err = dao.DB.Table(gm.tableName).Where("id = ?", mg.Id).Save(mg).Error
 	return err
 }
 

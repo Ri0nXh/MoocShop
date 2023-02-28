@@ -32,7 +32,6 @@ func initLogger() (err error) {
 	}
 	lg = zap.New(core, zap.AddCaller())
 	zap.ReplaceGlobals(lg)
-	zap.L().Info("init logger success")
 	return
 }
 
