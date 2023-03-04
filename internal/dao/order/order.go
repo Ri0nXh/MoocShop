@@ -4,7 +4,6 @@ import (
 	"MoocShop/internal/dao"
 	"MoocShop/internal/model"
 	"errors"
-	"sync"
 	"time"
 )
 
@@ -31,35 +30,51 @@ func NewOrderManager(tableName string) *OrderManager {
 	}
 }
 
-var m sync.Mutex
-
 // Create 创建商品接口
 func (o *OrderManager) Create(gid int, mo *model.Order) error {
-	// 创建订单商品关系表
-	ogr := model.OrderGoodsRef{
-		GoodsId:        gid,
-		OrderId:        mo.Id,
-		GoodsOptionsId: 1,
-		Count:          1,
-		Remark:         mo.Remark,
-		Price:          mo.Price,
-		CouponPrice:    mo.CouponPrice,
-		ActualPrice:    mo.ActualPrice,
-		CreatedAt:      time.Now(),
-		UpdatedAt:      time.Now(),
-	}
 
-	m.Lock()
-	defer m.Unlock()
+	//m.Lock()
+	//defer m.Unlock()
 	tx := dao.DB.Begin()
-	// 查询商品信息是否存在
+	sqlStr := "update goods set stock = stock - 1,sale = sale + 1 where stock > 0 and id = ?"
+	exec := tx.Exec(sqlStr, gid)
+	if err := exec.Error; err != nil {
+		return err
+	}
+	if exec.RowsAffected > 0 {
+		// 创建订单商品关系表
+		ogr := model.OrderGoodsRef{
+			GoodsId:        gid,
+			OrderId:        mo.Id,
+			GoodsOptionsId: 1,
+			Count:          1,
+			Remark:         mo.Remark,
+			Price:          mo.Price,
+			CouponPrice:    mo.CouponPrice,
+			ActualPrice:    mo.ActualPrice,
+			CreatedAt:      time.Now(),
+			UpdatedAt:      time.Now(),
+		}
+		// 创建订单
+		if err := tx.Create(&mo).Error; err != nil {
+			tx.Rollback()
+			return errors.New("订单创建失败")
+		}
+		if err := tx.Table("order_goods_ref").Create(&ogr).Error; err != nil {
+			tx.Rollback()
+			return errors.New("订单商品关系表创建失败")
+		}
+	}
+	tx.Commit()
+	return nil
+	/*// 查询商品信息是否存在
 	var gm model.Goods
 	if result := tx.Table("goods").Where("id = ? and stock > 0", gid).Find(&gm); result.RowsAffected == 0 {
 		tx.Rollback()
 		return errors.New("未查询到此商品")
 	}
 	// 校验商品是否有库存
-	//fmt.Println("商品库存 =》", gm.Stock)
+	fmt.Println("商品库存 =》", gm.Stock)
 	if gm.Stock > 0 {
 		// 库存扣减1，销量增加1
 		gm.Stock -= 1
@@ -87,7 +102,7 @@ func (o *OrderManager) Create(gid int, mo *model.Order) error {
 		return nil
 	}
 	tx.Rollback()
-	return errors.New("此商品库存不足")
+	return errors.New("此商品库存不足")*/
 }
 
 func (o *OrderManager) Delete(i int) error {
