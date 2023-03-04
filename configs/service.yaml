@@ -1,6 +1,6 @@
 app:
   name: MoocShop
-  port: 8080
+  port: 8000
   mode: dev
 
 

@@ -8,7 +8,11 @@ func SetupRouter() *gin.Engine {
 	// 商品路由
 	GoodsRouter(ApiGroup)
 
+	// 订单路由
+	OrderRouter(ApiGroup)
+
 	// 用户路由
 	UserRouter(ApiGroup)
+
 	return g
 }
