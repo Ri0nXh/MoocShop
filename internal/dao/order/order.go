@@ -33,8 +33,6 @@ func NewOrderManager(tableName string) *OrderManager {
 // Create 创建商品接口
 func (o *OrderManager) Create(gid int, mo *model.Order) error {
 
-	//m.Lock()
-	//defer m.Unlock()
 	tx := dao.DB.Begin()
 	sqlStr := "update goods set stock = stock - 1,sale = sale + 1 where stock > 0 and id = ?"
 	exec := tx.Exec(sqlStr, gid)
@@ -64,6 +62,9 @@ func (o *OrderManager) Create(gid int, mo *model.Order) error {
 			tx.Rollback()
 			return errors.New("订单商品关系表创建失败")
 		}
+	} else {
+		tx.Rollback()
+		return errors.New("库存不足")
 	}
 	tx.Commit()
 	return nil

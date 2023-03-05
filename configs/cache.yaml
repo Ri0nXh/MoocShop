@@ -1,0 +1,6 @@
+redis-local:
+  address: "127.0.0.1:16379"
+  password: ""
+  db: 5
+  pool_size: 10
+  min_idle_conns: 3

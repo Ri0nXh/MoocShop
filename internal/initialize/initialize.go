@@ -28,4 +28,10 @@ func Run() {
 	}
 	zap.L().Info("init mysql success")
 
+	// 初始化redis
+	err = dao.InitRedis()
+	if err != nil {
+		fmt.Printf("init redis error: ", err)
+	}
+	zap.L().Info("init redis success")
 }
